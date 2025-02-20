@@ -17,23 +17,11 @@ export const HomeScreen = ({navigation}) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const {state} = useContext(TimerContext);
-  console.log('+___________', state.timers);
 
   const categories = [...new Set(state.timers.map(timer => timer.category))];
 
   const filteredCategories =
     selectedCategory.length > 0 ? selectedCategory : categories;
-
-  const getTimerStats = () => {
-    const timers = selectedCategory
-      ? state.timers.filter(timer => timer.category === selectedCategory)
-      : state.timers;
-    const total = timers.length;
-    const active = timers.filter(t => !t.isCompleted).length;
-    return {total, active};
-  };
-
-  const stats = getTimerStats();
 
   const updateSelectedCategory = category => {
     if (selectedCategory.includes(category)) {

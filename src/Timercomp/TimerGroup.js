@@ -42,9 +42,6 @@ export const TimerGroup = ({category, timers}) => {
         <View style={styles.headerLeft}>
           <Text style={styles.categoryTitle}>{category}</Text>
           <View style={styles.bulkActions}>
-            {/* <Text style={styles.timerCount}>
-              {incompleteCount} active / {timers.length} total
-            </Text> */}
             {incompleteCount > 0 && (
               <>
                 <TouchableOpacity onPress={handleBulkStart}>
