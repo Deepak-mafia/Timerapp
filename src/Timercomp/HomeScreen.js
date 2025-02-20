@@ -17,6 +17,7 @@ export const HomeScreen = ({navigation}) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const {state} = useContext(TimerContext);
+  console.log('+___________', state.timers);
 
   const categories = [...new Set(state.timers.map(timer => timer.category))];
 
@@ -94,10 +95,17 @@ export const HomeScreen = ({navigation}) => {
           <AddTimerForm onClose={() => setModalVisible(false)} />
         </View>
       </Modal>
-
-      <ScrollView>
-        <TimerList categories={filteredCategories} />
-      </ScrollView>
+      {state.timers.length === 0 ? (
+        <View style={styles.firstTimeContainer}>
+          <Text style={styles.firstTimeText}>
+            Try creating your first timer
+          </Text>
+        </View>
+      ) : (
+        <ScrollView>
+          <TimerList categories={filteredCategories} />
+        </ScrollView>
+      )}
     </View>
   );
 };
@@ -169,5 +177,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     textAlign: 'center',
+  },
+  firstTimeContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  firstTimeText: {
+    fontSize: 18,
+    color: '#666',
   },
 });
