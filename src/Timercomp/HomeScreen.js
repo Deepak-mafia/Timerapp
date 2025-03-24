@@ -24,17 +24,6 @@ export const HomeScreen = ({navigation}) => {
   const filteredCategories =
     selectedCategory.length > 0 ? selectedCategory : categories;
 
-  const getTimerStats = () => {
-    const timers = selectedCategory
-      ? state.timers.filter(timer => timer.category === selectedCategory)
-      : state.timers;
-    const total = timers.length;
-    const active = timers.filter(t => !t.isCompleted).length;
-    return {total, active};
-  };
-
-  const stats = getTimerStats();
-
   const updateSelectedCategory = category => {
     if (selectedCategory.includes(category)) {
       setSelectedCategory(prev => {
@@ -95,10 +84,17 @@ export const HomeScreen = ({navigation}) => {
           <AddTimerForm onClose={() => setIsModalVisible(false)} />
         </View>
       </Modal>
-
-      <ScrollView>
-        <TimerList categories={filteredCategories} />
-      </ScrollView>
+      {state.timers.length === 0 ? (
+        <View style={styles.firstTimeContainer}>
+          <Text style={styles.firstTimeText}>
+            Try creating your first timer
+          </Text>
+        </View>
+      ) : (
+        <ScrollView>
+          <TimerList categories={filteredCategories} />
+        </ScrollView>
+      )}
     </View>
   );
 };
@@ -170,5 +166,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     textAlign: 'center',
+  },
+  firstTimeContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  firstTimeText: {
+    fontSize: 18,
+    color: '#666',
   },
 });
