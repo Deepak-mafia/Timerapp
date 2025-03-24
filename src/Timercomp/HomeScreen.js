@@ -12,9 +12,10 @@ import {TimerContext} from '../../TimerContext';
 import {TimerList} from './TimerList';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AddTimerForm} from './AddTimerForm';
+import {storage} from '../../App';
 
 export const HomeScreen = ({navigation}) => {
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const {state} = useContext(TimerContext);
 
@@ -52,7 +53,7 @@ export const HomeScreen = ({navigation}) => {
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.addButton}
-          onPress={() => setModalVisible(true)}>
+          onPress={() => setIsModalVisible(true)}>
           <Text style={styles.addButtonText}>Add Timer +</Text>
         </TouchableOpacity>
 
@@ -91,7 +92,7 @@ export const HomeScreen = ({navigation}) => {
 
       <Modal visible={isModalVisible} animationType="slide" transparent={true}>
         <View style={styles.modalContainer}>
-          <AddTimerForm onClose={() => setModalVisible(false)} />
+          <AddTimerForm onClose={() => setIsModalVisible(false)} />
         </View>
       </Modal>
 
