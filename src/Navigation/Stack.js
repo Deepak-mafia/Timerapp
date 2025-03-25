@@ -3,9 +3,23 @@ import WelcomeScreen from '../Screens/Onboarding/WelcomeScreen';
 import HomeScreen from '../Screens/LoggedIn/HomeScreen';
 import {HistoryScreen} from '../Timercomp/HistoryScreen';
 import {HomeScreen as TimerHomeScreen} from '../Timercomp/HomeScreen';
+import Login from '../Screens/StarWars/Login';
+import Search from '../Screens/StarWars/Search';
 
 // Create the navigator
 const Stack = createNativeStackNavigator();
+
+const StarWarsStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Search" component={Search} />
+    </Stack.Navigator>
+  );
+};
 
 // Onboarding Stack Component
 const OnboardingStack = () => {
@@ -22,6 +36,7 @@ const OnboardingStack = () => {
 };
 
 // LoggedIn Stack Component
+
 const LoggedInStack = () => {
   return (
     <Stack.Navigator
@@ -69,4 +84,4 @@ const TimerStack = () => {
   );
 };
 
-export {OnboardingStack, LoggedInStack, TimerStack};
+export {OnboardingStack, LoggedInStack, TimerStack, StarWarsStack};
