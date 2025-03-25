@@ -1,21 +1,21 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import Login from '../Screens/StarWars/Login';
-import Search from '../Screens/StarWars/Search';
+import ScreenOne from '../Screens/BasicSetup/ScreenOne';
+import ScreenTwo from '../Screens/BasicSetup/ScreenTwo';
 
 // Create the navigator
 const Stack = createNativeStackNavigator();
 
-const StarWarsStack = () => {
+const BasicStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Search" component={Search} />
+      <Stack.Screen name="ScreenOne" component={ScreenOne} />
+      <Stack.Screen name="ScreenTwo" component={ScreenTwo} />
     </Stack.Navigator>
   );
 };
 
-export {StarWarsStack};
+export {BasicStack};
