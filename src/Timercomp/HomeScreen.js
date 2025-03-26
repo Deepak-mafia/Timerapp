@@ -12,7 +12,6 @@ import {TimerContext} from '../../TimerContext';
 import {TimerList} from './TimerList';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AddTimerForm} from './AddTimerForm';
-import {storage} from '../../App';
 
 export const HomeScreen = ({navigation}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
