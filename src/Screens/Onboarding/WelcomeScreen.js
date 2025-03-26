@@ -14,32 +14,14 @@ const WelcomeScreen = () => {
   };
 
   const handleLogin = () => {
+    console.log('handleLogin');
+
     storage.set('isLoggedIn', true);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        {/* <Text style={[styles.text.h1, {}]}>Welcome</Text>
-        <Text style={styles.text.body1}>Welcome1</Text>
-        <Text>Welcome1</Text>
-
-        <Text style={styles.text.body1}>This is a sample component</Text>
-        <Text style={styles.text.body2}>Welcome</Text>
-        <Text style={styles.text.caption}>This is a sample component</Text>
-
-        <TouchableOpacity
-          style={styles.button.primary}
-          // onPress={toggleTheme}
-        >
-          <Text style={[styles.text.body1, {color: colors.text.primary}]}>
-            toggleTheme
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button.secondary} onPress={toggleTheme}>
-          <Text style={[styles.text.body1]}>toggleTheme</Text>
-        </TouchableOpacity>
-        <TextInput style={styles.input} /> */}
         <TouchableOpacity
           onPress={handleLogin}
           style={[styles.button.primary, {marginVertical: 8}]}>
