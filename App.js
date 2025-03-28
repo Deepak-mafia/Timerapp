@@ -1,40 +1,42 @@
 // 2. App.js (Critical Fixes)
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {ActivityIndicator, View} from 'react-native';
-
 import ErrorBoundary from './src/components/ErrorBoundary';
-import AppNavigator from './src/Navigation/AppNavigator';
-import {useAuthStore} from './src/stores/authStore';
+import {NotesStack} from './src/Navigation/AppNavigator';
+import {ActivityIndicator, SafeAreaView, View} from 'react-native';
+import {useNoteStore} from './src/stores/notesStore';
 
 const App = () => {
-  const [isHydrated, setIsHydrated] = useState(false);
+  const isHydrated = useNoteStore.persist.hasHydrated();
 
-  // Separate hydration flow
   useEffect(() => {
-    const unsubscribe = useAuthStore.persist.onFinishHydration(() => {
-      setIsHydrated(true);
-    });
+    const initializeStore = async () => {
+      try {
+        await useNoteStore.persist.rehydrate();
+      } catch (error) {
+        console.error('Store initialization failed:', error);
+      }
+    };
 
-    // Trigger manual rehydration
-    useAuthStore.persist.rehydrate();
-
-    return () => unsubscribe();
-  }, []);
+    if (!isHydrated) {
+      initializeStore();
+    }
+  }, [isHydrated]);
 
   if (!isHydrated) {
     return (
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        <ActivityIndicator size="large" />
+      <View style={{flex: 1}}>
+        <ActivityIndicator size={30} color={'green'} />
       </View>
     );
   }
-
   return (
     <ErrorBoundary>
-      <NavigationContainer>
-        <AppNavigator />
-      </NavigationContainer>
+      <SafeAreaView style={{flex: 1}}>
+        <NavigationContainer>
+          <NotesStack />
+        </NavigationContainer>
+      </SafeAreaView>
     </ErrorBoundary>
   );
 };

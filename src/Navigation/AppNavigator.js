@@ -1,27 +1,36 @@
 // 3. navigation/AppNavigator.js (Fixed Implementation)
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {useUser} from '../stores/authStore';
-import HomeScreen from '../Screens/HomeScreen';
-import LoginScreen from '../Screens/LoginScreen';
+
+import AllNotesScreen from '../Screens/AllNotesScreen';
+import EditNoteScreen from '../Screens/EditNoteScreen';
 
 const Stack = createNativeStackNavigator();
 
-const AppNavigator = () => {
-  const user = useUser();
-
+const NotesStack = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      {user ? (
-        <Stack.Screen name="Home" component={HomeScreen} />
-      ) : (
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{animationTypeForReplace: 'pop'}}
-        />
-      )}
+    <Stack.Navigator
+      // initialRouteName="AllNotes"
+      screenOptions={{headerShown: false}}>
+      <Stack.Screen
+        name="AllNotes"
+        component={AllNotesScreen}
+        options={{
+          title: 'All Notes',
+          headerStyle: {backgroundColor: '#121212'},
+          headerTintColor: '#fff',
+        }}
+      />
+      <Stack.Screen
+        name="EditNote"
+        component={EditNoteScreen}
+        options={{
+          title: 'Edit Note',
+          headerStyle: {backgroundColor: '#121212'},
+          headerTintColor: '#fff',
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
-export default AppNavigator;
+export {NotesStack};
